@@ -8,6 +8,8 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use yii\db\Expression;
+use yii\db\ActiveRecord;
+use backend\models\Gender;
 
 /**
  * This is the model class for table "profile".
@@ -61,6 +63,7 @@ class Profile extends \yii\db\ActiveRecord
             [['birthdate'], 'date', 'format'=>'Y-m-d'],
             [['gender_id'], 'exist', 'skipOnError' => true, 'targetClass' => Gender::className(), 'targetAttribute' => ['gender_id' => 'id']],
 
+
         ];
     }
 
@@ -78,12 +81,13 @@ class Profile extends \yii\db\ActiveRecord
             'gender_id' => 'Gender ID',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
+            'genderName' => Yii::t('app', 'Gender'),
+            'userLink' => Yii::t('app', 'User'),
+             'profileIdLink' => Yii::t('app', 'Profile'),
         ];
     }
 
-    'genderName' => Yii::t('app', 'Gender'),
-    'userLink' => Yii::t('app', 'User'),
-    'profileIdLink' => Yii::t('app', 'Profile'),
+
 
     /**
      * @return \yii\db\ActiveQuery
@@ -142,4 +146,14 @@ class Profile extends \yii\db\ActiveRecord
         $options = [];
         return Html::a($this->id, $url, $options);
     }
+
+    public function beforeValidate()
+    {
+        if ($this->birthdate != null) {
+        $new_date_format = date('Y-m-d', strtotime($this->birthdate));
+        $this->birthdate = $new_date_format;
+        }
+        return parent::beforeValidate();
+    }
+
 }
