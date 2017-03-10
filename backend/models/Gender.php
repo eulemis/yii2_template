@@ -40,11 +40,11 @@ class Gender extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'gender_name' => 'Gender,
+            'gender_name' => 'Gender',
         ];
     }
 
-    /**
+    /*
      * @return \yii\db\ActiveQuery
      */
     public function getProfiles()

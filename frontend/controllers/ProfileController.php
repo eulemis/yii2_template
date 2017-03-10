@@ -26,16 +26,16 @@ class ProfileController extends Controller
             'only' => ['index', 'view','create', 'update', 'delete'],
             'rules' => [
             [
-            'actions' => ['index', 'view','create', 'update', 'delete'],
-            'allow' => true,
-            'roles' => ['@'],
+                    'actions' => ['index', 'view','create', 'update', 'delete'],
+                    'allow' => true,
+                    'roles' => ['@'],
+                    ],
             ],
-        ],
      ],
             'verbs' => [
             'class' => VerbFilter::className(),
             'actions' => [
-            'delete' => ['post'],
+                'delete' => ['post'],
             ],
         ],
      ];
@@ -48,9 +48,9 @@ class ProfileController extends Controller
     public function actionIndex()
     {
         if ($already_exists = RecordHelpers::userHas('profile')) {
-        return $this->render('view', [
-        'model' => $this->findModel($already_exists),
-        ]);
+            return $this->render('view', [
+                    'model' => $this->findModel($already_exists),
+                 ]);
         } else {
         return $this->redirect(['create']);
         }

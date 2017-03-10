@@ -59,7 +59,6 @@ class Profile extends \yii\db\ActiveRecord
             [['gender_id', 'user_id'], 'integer'],
             [['gender_id'],'in', 'range'=>array_keys($this->getGenderList())],
             [['first_name', 'last_name'], 'string', 'max' => 45],
-
             [['birthdate'], 'date', 'format'=>'Y-m-d'],
             [['gender_id'], 'exist', 'skipOnError' => true, 'targetClass' => Gender::className(), 'targetAttribute' => ['gender_id' => 'id']],
 
@@ -83,7 +82,7 @@ class Profile extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
             'genderName' => Yii::t('app', 'Gender'),
             'userLink' => Yii::t('app', 'User'),
-             'profileIdLink' => Yii::t('app', 'Profile'),
+            'profileIdLink' => Yii::t('app', 'Profile'),
         ];
     }
 
